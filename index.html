@@ -361,7 +361,8 @@ function calculate(){
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   const peakLoadWithMargin=peakW*MARGIN;
   const invKvaRaw=peakLoadWithMargin/1000;
-  const invKva=roundUpList(invKvaRaw,STD_INV_KVA);
+  let invKva=roundUpList(invKvaRaw,STD_INV_KVA);
+  if(invKvaRaw>STD_INV_KVA[STD_INV_KVA.length-1])invKva=STD_INV_KVA[STD_INV_KVA.length-1];
   const solarWRaw=(batKwh*1000*OVERSIZE)/2,solarW=Math.ceil(solarWRaw/50)*50;
   const series=VOLTAGE/12;
   const parallelStrings=Math.ceil(batAh/100);
