@@ -360,7 +360,7 @@ function calculate(){
   const batKwhRaw=grossKwh/DOD,batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   const invKvaRaw=(peakW*MARGIN)/1000,invKva=roundUpList(invKvaRaw,STD_INV_KVA);
-  const solarWRaw=(grossWh/PEAK_SUN)*OVERSIZE,solarW=Math.ceil(solarWRaw/50)*50;
+  const solarWRaw=(batKwh*1000/PEAK_SUN)*OVERSIZE,solarW=Math.ceil(solarWRaw/50)*50;
   const series=VOLTAGE/12,totalBats=Math.ceil(Math.ceil((batKwh*1000)/1200)/series)*series;
   document.getElementById('r-subtitle').textContent=`Residential · Nigeria · ${VOLTAGE}V`;
   document.getElementById('r-energy').textContent=totalKwh.toFixed(2);
