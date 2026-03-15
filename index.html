@@ -67,10 +67,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dd-item.added .dd-item-badge{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.2)}
 .dd-empty{padding:24px;text-align:center;color:var(--muted);font-size:12px;font-family:var(--mono)}
 .list-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:12px}
-.list-head{display:grid;grid-template-columns:1.6fr 52px 80px 80px 80px 34px;gap:7px;padding:10px 14px;background:rgba(16,212,160,.05);border-bottom:1px solid var(--border)}
+.list-head{display:grid;grid-template-columns:1.6fr 52px 80px 80px 34px;gap:7px;padding:10px 14px;background:rgba(16,212,160,.05);border-bottom:1px solid var(--border)}
 .th{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 .list-empty{padding:26px;text-align:center;color:var(--muted);font-size:12px;font-family:var(--mono)}
-.srow{display:grid;grid-template-columns:1.6fr 52px 80px 80px 80px 34px;gap:7px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.03);align-items:center;animation:fadeIn .22s ease}
+.srow{display:grid;grid-template-columns:1.6fr 52px 80px 80px 34px;gap:7px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.03);align-items:center;animation:fadeIn .22s ease}
 .srow:last-child{border-bottom:none}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .srow-name{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;min-width:0}
@@ -81,7 +81,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .inp:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(16,212,160,.1)}
 .inp[type=number]{-moz-appearance:textfield}
 .inp[type=number]::-webkit-outer-spin-button,.inp[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
-.inp.intermittent{border-color:rgba(245,166,35,.35);color:var(--sun2)}
 .wh-cell{font-family:var(--mono);font-size:11px;color:var(--sun);font-weight:500;text-align:right;line-height:1.4}
 .wh-avg{font-size:9px;color:var(--muted);display:block}
 .del{background:none;border:1px solid rgba(248,113,113,.2);border-radius:7px;color:var(--red);cursor:pointer;font-size:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
@@ -91,6 +90,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .asmpt{font-family:var(--mono);font-size:11px;color:var(--muted)}
 .asmpt span{color:var(--green);font-weight:500}
 .asmpt.vd span{color:var(--sun);font-weight:700}
+.oversize-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:13px}
+.oversize-label{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text);flex:1}
+.oversize-label span{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;margin-top:2px}
+.toggle{position:relative;width:48px;height:26px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:var(--card2);border:1px solid var(--border2);border-radius:13px;cursor:pointer;transition:all .25s}
+.toggle-track::after{content:'';position:absolute;width:20px;height:20px;left:3px;top:2px;background:var(--muted);border-radius:50%;transition:all .25s}
+.toggle input:checked+.toggle-track{background:rgba(16,212,160,.2);border-color:var(--green)}
+.toggle input:checked+.toggle-track::after{transform:translateX(22px);background:var(--green)}
 .calc-btn{width:100%;padding:16px;border:none;border-radius:13px;cursor:pointer;background:linear-gradient(135deg,var(--sun2),var(--sun),#e08800);color:#0a0f1a;font-family:var(--sans);font-size:15px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 4px 20px rgba(245,166,35,.28);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:10px}
 .calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,.4)}
 .calc-btn:active{transform:translateY(0)}
@@ -128,16 +136,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ptag .tag-w{font-size:14px;font-weight:700;display:block;margin-bottom:3px}
 .ptag .tag-n{font-size:10px}
 .bk-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px}
-.bk-head{display:grid;grid-template-columns:1fr 44px 60px 70px 70px 56px;gap:6px;padding:10px 14px;background:rgba(16,212,160,.04);border-bottom:1px solid var(--border)}
-.bk-row{display:grid;grid-template-columns:1fr 44px 60px 70px 70px 56px;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);font-family:var(--mono);font-size:11px;align-items:center}
+.bk-head{display:grid;grid-template-columns:1fr 44px 60px 70px 56px;gap:6px;padding:10px 14px;background:rgba(16,212,160,.04);border-bottom:1px solid var(--border)}
+.bk-row{display:grid;grid-template-columns:1fr 44px 60px 70px 56px;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);font-family:var(--mono);font-size:11px;align-items:center}
 .bk-row:last-child{border-bottom:none}
 .bar-wrap{display:flex;align-items:center;gap:5px}
 .bar{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--sun),var(--green));min-width:2px}
-.intermit-tag{font-size:9px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:4px;padding:1px 5px;color:var(--sun2)}
 .recalc-btn{width:100%;padding:14px;border:1px solid var(--border2);border-radius:13px;cursor:pointer;background:transparent;color:var(--text);font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.4px;transition:all .2s;margin-bottom:16px}
 .recalc-btn:hover{border-color:var(--green);color:var(--green);background:rgba(16,212,160,.05)}
 footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
-@media(max-width:620px){.list-head,.srow{grid-template-columns:1.4fr 44px 68px 68px 68px 28px;gap:5px}.bk-head,.bk-row{grid-template-columns:1fr 36px 52px 60px 60px 48px;gap:4px;font-size:10px}}
+@media(max-width:620px){.list-head,.srow{grid-template-columns:1.4fr 44px 68px 68px 28px;gap:5px}.bk-head,.bk-row{grid-template-columns:1fr 36px 52px 60px 48px;gap:4px;font-size:10px}}
 </style>
 </head>
 <body>
@@ -175,19 +182,22 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
   <div class="list-wrap">
     <div class="list-head">
       <div class="th">Appliance</div><div class="th">Qty</div><div class="th">Hrs/Day</div>
-      <div class="th">Days/Wk</div><div class="th">Wh/Day ⌀</div><div class="th"></div>
+      <div class="th">Wh/Day</div><div class="th"></div>
     </div>
     <div id="sel-list"><div class="list-empty">Click "Add appliance" to get started</div></div>
   </div>
-  <div class="list-hint">💡 Set <strong style="color:var(--sun2)">Days/Week</strong> below 7 for appliances not used daily — e.g. pumping machine (3 days), washing machine (2 days).</div>
+  <div class="list-hint">💡 Adjust <strong style="color:var(--sun2)">Hours/Day</strong> to match your typical daily usage for each appliance.</div>
   <div class="sec">System Assumptions</div>
+  <div class="oversize-row">
+    <div class="oversize-label">Oversize system by 1.2×<span>Adds 20% buffer to battery, inverter &amp; panels</span></div>
+    <label class="toggle"><input type="checkbox" checked onchange="toggleOversize(this.checked)"/><span class="toggle-track"></span></label>
+  </div>
   <div class="assumptions">
     <div class="asmpt">Peak sun hours <span>5 hrs</span></div>
-    <div class="asmpt">Panel oversize <span>×1.2</span></div>
     <div class="asmpt vd">System voltage <span id="voltage-display">48V</span></div>
     <div class="asmpt">Battery DoD <span>80%</span></div>
     <div class="asmpt">System losses <span>20%</span></div>
-    <div class="asmpt">Inverter margin <span>25%</span></div>
+    <div class="asmpt" id="oversize-display">Oversizing <span>×1.2</span></div>
   </div>
   <button class="calc-btn" onclick="calculate()">
     <span>☀️</span><span>Calculate My Solar System</span><span>→</span>
@@ -243,7 +253,7 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
   <div class="bk-wrap">
     <div class="bk-head">
       <div class="th">Appliance</div><div class="th">Qty</div><div class="th">Load W</div>
-      <div class="th">Days/Wk</div><div class="th">Avg Wh/Day</div><div class="th">Share</div>
+      <div class="th">Wh/Day</div><div class="th">Share</div>
     </div>
     <div id="breakdown"></div>
   </div>
@@ -327,14 +337,13 @@ const DB=[
   {id:'gate_motor',name:'Gate Motor',icon:'🚪',w:500,cat:'Utilities',daily:false},
   {id:'intercom',name:'Intercom / Video Door',icon:'🔔',w:10,cat:'Utilities',daily:true},
 ];
-const DEFDPW={wm_hand:2,wm_semi:2,wm_top_load:2,wm_front_load:2,wm_front_load_lg:2,dryer_sm:2,dryer_lg:2,pressing_iron:3,steam_iron:3,pump_half:3,pump_1hp:3,pump_1_5hp:3,pump_2hp:3,borehole_1hp:4,borehole_2hp:4,submersible:3,hair_dryer:3,clipper:2,vacuum:2,gate_motor:7,printer:2};
 const DEFHRS={led_bulb:6,cfl_bulb:6,tube_light:6,flood_45:5,flood_100:5,street_light:10,ceil_fan:8,stand_fan:8,table_fan:6,exhaust_fan:4,ac_1hp:6,ac_1_5hp:6,ac_2hp:6,ac_2_5hp:6,ac_3hp:6,fridge_sm:24,fridge_md:24,fridge_lg:24,fridge_xl:24,deep_frz_sm:24,deep_frz_md:24,deep_frz_lg:24,microwave_sm:0.5,microwave_lg:0.5,elec_kettle:0.5,blender:0.5,toaster:0.3,cooker_2plate:2,cooker_4plate:2,induction:2,rice_cooker:1,food_warmer:4,wm_hand:1,wm_semi:1.5,wm_top_load:1.5,wm_front_load:2,wm_front_load_lg:2.5,dryer_sm:1,dryer_lg:1.5,pressing_iron:1,steam_iron:1,tv_24:6,tv_32:6,tv_43:6,tv_55:6,tv_65:6,decoder:6,sound_sm:4,sound_lg:4,laptop:5,desktop:5,printer:0.5,phone_chgr:4,tablet_chgr:4,pump_half:2,pump_1hp:2,pump_1_5hp:2,pump_2hp:2,borehole_1hp:3,borehole_2hp:3,submersible:3,water_heater_ins:0.5,water_heater_str:1,security_cam:24,cctv_dvr:24,router:24,router_4g:24,hair_dryer:0.5,clipper:0.5,vacuum:0.5,gate_motor:0.3,intercom:24};
 const CATS=['All',...new Set(DB.map(a=>a.cat))];
 const STD_INV_KVA=[0.5,0.65,0.8,1,1.5,2,2.5,3,3.5,5,7.5,10,15,20];
 const STD_BAT_KWH=[5,7.5,10,15,20,25,30,40,50];
 const PANEL_SIZES=[250,300,350,400,450,500,550,600,650];
 const selected={};
-let activeCat='All',ddOpen=false,VOLTAGE=48;
+let activeCat='All',ddOpen=false,VOLTAGE=48,OVERSIZE=true;
 
 function goToResults(){const p1=document.getElementById('page1'),p2=document.getElementById('page2');p1.classList.remove('active');p1.classList.add('hidden-left');p2.classList.remove('hidden-right');p2.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}
 function goBack(){const p1=document.getElementById('page1'),p2=document.getElementById('page2');p2.classList.remove('active');p2.classList.add('hidden-right');p1.classList.remove('hidden-left');p1.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}
@@ -343,44 +352,52 @@ function toggleDropdown(){ddOpen=!ddOpen;document.getElementById('dropdown').cla
 document.addEventListener('click',e=>{if(ddOpen&&!document.querySelector('.add-wrap').contains(e.target)){ddOpen=false;document.getElementById('dropdown').classList.remove('open');document.getElementById('trigger').classList.remove('open');}});
 function buildCats(){document.getElementById('dd-cats').innerHTML=CATS.map(c=>`<span class="cat-pill${c===activeCat?' active':''}" onclick="setCategory(event,'${c}')">${c}</span>`).join('');}
 function setCategory(e,cat){e.stopPropagation();activeCat=cat;buildCats();buildDDList(document.getElementById('dd-search').value,cat);}
-function buildDDList(search,cat){const lc=search.toLowerCase();const items=DB.filter(a=>(cat==='All'||a.cat===cat)&&(!lc||a.name.toLowerCase().includes(lc)||a.cat.toLowerCase().includes(lc)));const el=document.getElementById('dd-list');if(!items.length){el.innerHTML='<div class="dd-empty">No appliances found</div>';return;}el.innerHTML=items.map(a=>{const isAdded=!!selected[a.id];const tag=!a.daily?`<span style="font-size:9px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:4px;padding:1px 5px;color:var(--sun2);margin-left:4px">not daily</span>`:'';return`<div class="dd-item${isAdded?' added':''}" onclick="toggleApp(event,'${a.id}')"><span class="dd-item-icon">${a.icon}</span><div class="dd-item-info"><div class="dd-item-name">${a.name}${tag}</div><div class="dd-item-meta">${a.cat} · ${a.w} W</div></div><span class="dd-item-badge">${isAdded?'− Remove':'+ Add'}</span></div>`;}).join('');}
+function buildDDList(search,cat){const lc=search.toLowerCase();const items=DB.filter(a=>(cat==='All'||a.cat===cat)&&(!lc||a.name.toLowerCase().includes(lc)||a.cat.toLowerCase().includes(lc)));const el=document.getElementById('dd-list');if(!items.length){el.innerHTML='<div class="dd-empty">No appliances found</div>';return;}el.innerHTML=items.map(a=>{const isAdded=!!selected[a.id];return`<div class="dd-item${isAdded?' added':''}" onclick="toggleApp(event,'${a.id}')"><span class="dd-item-icon">${a.icon}</span><div class="dd-item-info"><div class="dd-item-name">${a.name}</div><div class="dd-item-meta">${a.cat} · ${a.w} W</div></div><span class="dd-item-badge">${isAdded?'− Remove':'+ Add'}</span></div>`;}).join('');}
 function filterDD(val){buildDDList(val,activeCat);}
-function toggleApp(e,id){e.stopPropagation();if(selected[id])delete selected[id];else selected[id]={qty:1,hrs:DEFHRS[id]||4,dpw:DEFDPW[id]||7};buildDDList(document.getElementById('dd-search').value,activeCat);renderList();}
-function avgWh(a,s){return s.qty*a.w*s.hrs*(s.dpw/7);}
-function renderList(){const ids=Object.keys(selected);const el=document.getElementById('sel-list');if(!ids.length){el.innerHTML='<div class="list-empty">Click "Add appliance" to get started</div>';return;}el.innerHTML=ids.map(id=>{const a=DB.find(x=>x.id===id),s=selected[id],wh=avgWh(a,s),interm=s.dpw<7;return`<div class="srow" id="srow-${id}"><div class="srow-name"><span class="srow-icon">${a.icon}</span><div><span class="srow-lbl">${a.name}</span><span class="srow-w">${a.w}W</span></div></div><input class="inp" type="number" min="1" max="20" value="${s.qty}" oninput="upd('${id}','qty',this.value)"><input class="inp" type="number" min="0.5" max="24" step="0.5" value="${s.hrs}" oninput="upd('${id}','hrs',this.value)"><input class="inp${interm?' intermittent':''}" type="number" min="1" max="7" step="1" value="${s.dpw}" oninput="upd('${id}','dpw',this.value)" id="dpw-${id}"><div class="wh-cell" id="wh-${id}">${fmtN(Math.round(wh))}${interm?`<span class="wh-avg">${s.dpw}d/wk avg</span>`:''}</div><button class="del" onclick="removeApp('${id}')">✕</button></div>`;}).join('');}
+function toggleApp(e,id){e.stopPropagation();if(selected[id])delete selected[id];else selected[id]={qty:1,hrs:DEFHRS[id]||4};buildDDList(document.getElementById('dd-search').value,activeCat);renderList();}
+function avgWh(a,s){return s.qty*a.w*s.hrs;}
+function renderList(){const ids=Object.keys(selected);const el=document.getElementById('sel-list');if(!ids.length){el.innerHTML='<div class="list-empty">Click "Add appliance" to get started</div>';return;}el.innerHTML=ids.map(id=>{const a=DB.find(x=>x.id===id),s=selected[id],wh=avgWh(a,s);return`<div class="srow" id="srow-${id}"><div class="srow-name"><span class="srow-icon">${a.icon}</span><div><span class="srow-lbl">${a.name}</span><span class="srow-w">${a.w}W</span></div></div><input class="inp" type="number" min="1" max="20" value="${s.qty}" oninput="upd('${id}','qty',this.value)"><input class="inp" type="number" min="0.5" max="24" step="0.5" value="${s.hrs}" oninput="upd('${id}','hrs',this.value)"><div class="wh-cell" id="wh-${id}">${fmtN(Math.round(wh))}</div><button class="del" onclick="removeApp('${id}')">✕</button></div>`;}).join('');}
 function removeApp(id){delete selected[id];renderList();buildDDList(document.getElementById('dd-search').value,activeCat);}
-function upd(id,field,val){if(!selected[id])return;selected[id][field]=parseFloat(val)||(field==='dpw'?7:0);const a=DB.find(x=>x.id===id),s=selected[id],wh=avgWh(a,s),interm=s.dpw<7;const cell=document.getElementById(`wh-${id}`);if(cell)cell.innerHTML=`${fmtN(Math.round(wh))}${interm?`<span class="wh-avg">${s.dpw}d/wk avg</span>`:''}`;const dpwInp=document.getElementById(`dpw-${id}`);if(dpwInp)dpwInp.classList.toggle('intermittent',interm);}
+function upd(id,field,val){if(!selected[id])return;selected[id][field]=parseFloat(val)||0;const a=DB.find(x=>x.id===id),s=selected[id],wh=avgWh(a,s);const cell=document.getElementById(`wh-${id}`);if(cell)cell.innerHTML=fmtN(Math.round(wh));}
+function toggleOversize(on){OVERSIZE=on;document.getElementById('oversize-display').innerHTML=`Oversizing <span>${on?'×1.2':'Off'}</span>`;}
 function calculate(){
   const ids=Object.keys(selected);
   if(!ids.length){alert('Add at least one appliance first.');return;}
-  let items=[],totalWhAvg=0,peakW=0;
-  ids.forEach(id=>{const a=DB.find(x=>x.id===id),s=selected[id];const loadW=s.qty*a.w,whDay=avgWh(a,s);totalWhAvg+=whDay;peakW+=loadW;items.push({name:a.name,icon:a.icon,qty:s.qty,w:a.w,hrs:s.hrs,dpw:s.dpw,loadW,whDay});});
-  const LOSS=0.20,DOD=0.80,PEAK_SUN=5,OVERSIZE=1.2,MARGIN=1.25;
-  const totalKwh=totalWhAvg/1000,grossWh=totalWhAvg/(1-LOSS),grossKwh=grossWh/1000;
-  const batKwhRaw=grossKwh/DOD,batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
+  let items=[],totalWhDay=0,peakW=0;
+  ids.forEach(id=>{const a=DB.find(x=>x.id===id),s=selected[id];const loadW=s.qty*a.w,whDay=avgWh(a,s);totalWhDay+=whDay;peakW+=loadW;items.push({name:a.name,icon:a.icon,qty:s.qty,w:a.w,hrs:s.hrs,loadW,whDay});});
+  const LOSS=0.20,DOD=0.80,PEAK_SUN=5;
+  const O=OVERSIZE?1.2:1;
+  const totalKwh=totalWhDay/1000;
+  /* Battery: grossWh / DOD, then oversize */
+  const grossWh=totalWhDay/(1-LOSS);
+  const batKwhRaw=(grossWh/1000/DOD)*O;
+  const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
-  const peakLoadWithMargin=peakW*MARGIN;
-  const invKvaRaw=peakLoadWithMargin/1000;
+  /* Inverter: peak load, then oversize */
+  const invKvaRaw=(peakW*O)/1000;
   let invKva=roundUpList(invKvaRaw,STD_INV_KVA);
   if(invKvaRaw>STD_INV_KVA[STD_INV_KVA.length-1])invKva=STD_INV_KVA[STD_INV_KVA.length-1];
-  const solarWRaw=(batKwh*1000*OVERSIZE)/2,solarW=Math.ceil(solarWRaw/50)*50;
+  /* Panel: (totalEnergy*O + peakLoad*O) then oversize, then /sunHrs */
+  const panelWattStep1=(totalWhDay*O)+(peakW*O);
+  const panelOversize=panelWattStep1*O;
+  const solarW=Math.ceil(panelOversize/PEAK_SUN);
   const series=VOLTAGE/12;
   const parallelStrings=Math.ceil(batAh/100);
   const totalBats=parallelStrings*series;
-  document.getElementById('r-subtitle').textContent=`Residential · Nigeria · ${VOLTAGE}V`;
+  document.getElementById('r-subtitle').textContent=`Residential · Nigeria · ${VOLTAGE}V${OVERSIZE?' · Oversized ×1.2':''}`;
   document.getElementById('r-energy').textContent=totalKwh.toFixed(2);
   document.getElementById('r-appliance-count').textContent=`${ids.length} appliance${ids.length!==1?'s':''} · peak load ${fmtN(peakW)} W`;
   document.getElementById('r-bat-kwh').textContent=batKwh+'kWh';
   document.getElementById('r-bat-sub').innerHTML=`<strong>${fmtN(batAh)} Ah</strong> @ ${VOLTAGE}V<br>${totalBats} × 100Ah/12V batteries`;
   document.getElementById('r-volt-badge').textContent=VOLTAGE+'V system';
   document.getElementById('r-inv-kva').textContent=invKva+'kVA';
-  document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*MARGIN))} W</strong> peak load<br>incl. 25% safety margin`;
+  document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*O))} W</strong> peak load${OVERSIZE?'<br>incl. 1.2× oversizing':''}`;
   function renderPanelCard(pw){const n=Math.ceil(solarW/pw);document.getElementById('r-pan-main').textContent=`${pw}W (${n})`;document.getElementById('r-pan-sub').innerHTML=`<strong>${n} panel${n!==1?'s':''}</strong> × ${pw}W<br>Total: ${fmtN(n*pw)} W installed`;document.querySelectorAll('.ptag').forEach(t=>{const tw=parseInt(t.querySelector('.tag-w').textContent);const n2=Math.ceil(solarW/tw);t.querySelector('.tag-n').textContent=`${n2} panel${n2!==1?'s':''}`;t.classList.toggle('best',tw===pw);});}
   window.renderPanelCard=renderPanelCard;
   document.getElementById('panel-opts').innerHTML=PANEL_SIZES.map(pw=>{const n=Math.ceil(solarW/pw);return`<div class="ptag${pw===500?' best':''}" onclick="renderPanelCard(${pw})"><span class="tag-w">${pw}W</span><span class="tag-n">${n} panel${n!==1?'s':''}</span></div>`;}).join('');
   renderPanelCard(500);
   const maxWh=Math.max(...items.map(i=>i.whDay),1);
-  document.getElementById('breakdown').innerHTML=[...items].sort((a,b)=>b.whDay-a.whDay).map(a=>{const pct=((a.whDay/totalWhAvg)*100).toFixed(1),bw=Math.max(3,Math.round((a.whDay/maxWh)*52));const tag=a.dpw<7?`<span class="intermit-tag">${a.dpw}d/wk</span>`:'<span style="color:var(--muted)">daily</span>';return`<div class="bk-row"><div>${a.icon} ${a.name}</div><div style="color:var(--muted)">${a.qty}</div><div>${fmtN(a.loadW)}</div><div>${tag}</div><div style="color:var(--sun)">${fmtN(Math.round(a.whDay))}</div><div class="bar-wrap"><div class="bar" style="width:${bw}px"></div><span style="color:var(--muted);font-size:10px">${pct}%</span></div></div>`;}).join('');
+  document.getElementById('breakdown').innerHTML=[...items].sort((a,b)=>b.whDay-a.whDay).map(a=>{const pct=((a.whDay/totalWhDay)*100).toFixed(1),bw=Math.max(3,Math.round((a.whDay/maxWh)*52));return`<div class="bk-row"><div>${a.icon} ${a.name}</div><div style="color:var(--muted)">${a.qty}</div><div>${fmtN(a.loadW)}</div><div style="color:var(--sun)">${fmtN(Math.round(a.whDay))}</div><div class="bar-wrap"><div class="bar" style="width:${bw}px"></div><span style="color:var(--muted);font-size:10px">${pct}%</span></div></div>`;}).join('');
   goToResults();
 }
 function roundUpList(val,list){return list.find(s=>s>=val)||list[list.length-1];}
