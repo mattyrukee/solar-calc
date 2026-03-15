@@ -193,7 +193,7 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
     <label class="toggle"><input type="checkbox" checked onchange="toggleOversize(this.checked)"/><span class="toggle-track"></span></label>
   </div>
   <div class="assumptions">
-    <div class="asmpt">Peak sun hours <span>5 hrs</span></div>
+    <div class="asmpt">Peak sun hours <span>4 hrs</span></div>
     <div class="asmpt vd">System voltage <span id="voltage-display">48V</span></div>
     <div class="asmpt">Battery DoD <span>80%</span></div>
     <div class="asmpt" id="oversize-display">Oversizing <span>×1.2</span></div>
@@ -257,7 +257,7 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
     <div id="breakdown"></div>
   </div>
   <button class="recalc-btn" onclick="goBack()">← Recalculate with different appliances</button>
-  <footer>Built for Nigerian homes · 5hr average peak sunlight</footer>
+  <footer>Built for Nigerian homes · 4hr average peak sunlight</footer>
 </div>
 </div>
 
@@ -364,7 +364,7 @@ function calculate(){
   if(!ids.length){alert('Add at least one appliance first.');return;}
   let items=[],totalWhDay=0,peakW=0;
   ids.forEach(id=>{const a=DB.find(x=>x.id===id),s=selected[id];const loadW=s.qty*a.w,whDay=avgWh(a,s);totalWhDay+=whDay;peakW+=loadW;items.push({name:a.name,icon:a.icon,qty:s.qty,w:a.w,hrs:s.hrs,loadW,whDay});});
-  const DOD=0.80,PEAK_SUN=5;
+  const DOD=0.80,PEAK_SUN=4;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
   /* Battery: totalWhDay / DOD, then oversize */
