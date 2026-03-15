@@ -339,7 +339,7 @@ const DB=[
 const DEFHRS={led_bulb:6,cfl_bulb:6,tube_light:6,flood_45:5,flood_100:5,street_light:10,ceil_fan:8,stand_fan:8,table_fan:6,exhaust_fan:4,ac_1hp:6,ac_1_5hp:6,ac_2hp:6,ac_2_5hp:6,ac_3hp:6,fridge_sm:24,fridge_md:24,fridge_lg:24,fridge_xl:24,deep_frz_sm:24,deep_frz_md:24,deep_frz_lg:24,microwave_sm:0.5,microwave_lg:0.5,elec_kettle:0.5,blender:0.5,toaster:0.3,cooker_2plate:2,cooker_4plate:2,induction:2,rice_cooker:1,food_warmer:4,wm_hand:1,wm_semi:1.5,wm_top_load:1.5,wm_front_load:2,wm_front_load_lg:2.5,dryer_sm:1,dryer_lg:1.5,pressing_iron:1,steam_iron:1,tv_24:6,tv_32:6,tv_43:6,tv_55:6,tv_65:6,decoder:6,sound_sm:4,sound_lg:4,laptop:5,desktop:5,printer:0.5,phone_chgr:4,tablet_chgr:4,pump_half:2,pump_1hp:2,pump_1_5hp:2,pump_2hp:2,borehole_1hp:3,borehole_2hp:3,submersible:3,water_heater_ins:0.5,water_heater_str:1,security_cam:24,cctv_dvr:24,router:24,router_4g:24,hair_dryer:0.5,clipper:0.5,vacuum:0.5,gate_motor:0.3,intercom:24};
 const CATS=['All',...new Set(DB.map(a=>a.cat))];
 const STD_INV_KVA=[0.5,0.65,0.8,1,1.5,2,2.5,3,3.5,5,7.5,10,15,20];
-const STD_BAT_KWH=[5,7.5,10,15,20,25,30,40,50];
+const STD_BAT_KWH=[1.8,2.5,3.8,5,7.5,10,15,20,25,30,40,50];
 const PANEL_SIZES=[250,300,350,400,450,500,550,600,650];
 const selected={};
 let activeCat='All',ddOpen=false,VOLTAGE=48,OVERSIZE=true;
