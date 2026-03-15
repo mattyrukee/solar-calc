@@ -196,7 +196,6 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
     <div class="asmpt">Peak sun hours <span>5 hrs</span></div>
     <div class="asmpt vd">System voltage <span id="voltage-display">48V</span></div>
     <div class="asmpt">Battery DoD <span>80%</span></div>
-    <div class="asmpt">System losses <span>20%</span></div>
     <div class="asmpt" id="oversize-display">Oversizing <span>×1.2</span></div>
   </div>
   <button class="calc-btn" onclick="calculate()">
@@ -365,12 +364,11 @@ function calculate(){
   if(!ids.length){alert('Add at least one appliance first.');return;}
   let items=[],totalWhDay=0,peakW=0;
   ids.forEach(id=>{const a=DB.find(x=>x.id===id),s=selected[id];const loadW=s.qty*a.w,whDay=avgWh(a,s);totalWhDay+=whDay;peakW+=loadW;items.push({name:a.name,icon:a.icon,qty:s.qty,w:a.w,hrs:s.hrs,loadW,whDay});});
-  const LOSS=0.20,DOD=0.80,PEAK_SUN=5;
+  const DOD=0.80,PEAK_SUN=5;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
-  /* Battery: grossWh / DOD, then oversize */
-  const grossWh=totalWhDay/(1-LOSS);
-  const batKwhRaw=(grossWh/1000/DOD)*O;
+  /* Battery: totalWhDay / DOD, then oversize */
+  const batKwhRaw=(totalWhDay/1000/DOD)*O;
   const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Inverter: peak load, then oversize */
