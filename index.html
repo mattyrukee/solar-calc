@@ -153,10 +153,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .recalc-btn:hover{border-color:var(--green);color:var(--green);background:rgba(16,212,160,.05)}
 footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
 @media(max-width:620px){
+body{min-height:auto}
+.page{min-height:auto}
+.page.hidden-left,.page.hidden-right{display:none}
 .header{flex-wrap:wrap;gap:10px}
 .header-wa{margin-left:0;width:100%;justify-content:center;padding:10px}
 .logo{width:40px;height:40px;font-size:20px;border-radius:10px}
-.inner{padding:18px 12px 60px}
+.inner{padding:16px 10px 24px}
 .list-head,.srow{grid-template-columns:1.4fr 44px 68px 68px 28px;gap:5px}
 .list-head{display:none}
 .srow{grid-template-columns:1fr;gap:8px;padding:12px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px}
@@ -180,6 +183,7 @@ footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute
 .cta-board{padding:18px}
 .cta-wa-btn{padding:12px 22px;font-size:13px;width:100%;justify-content:center}
 .back-btn{width:100%;justify-content:center}
+footer{padding-bottom:8px}
 }
 </style>
 </head>
