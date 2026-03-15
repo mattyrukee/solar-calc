@@ -30,14 +30,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .header p{font-size:11px;color:var(--muted);margin-top:3px;font-family:var(--mono);letter-spacing:.8px}
 .sec{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
 .sec::after{content:'';flex:1;height:1px;background:var(--border2)}
-.voltage-row{display:flex;align-items:center;gap:10px;margin-bottom:26px;flex-wrap:wrap}
-.voltage-label{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;flex-shrink:0}
-.volt-opts{display:flex;gap:8px;flex-wrap:wrap}
-.volt-btn{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:9px 20px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .18s}
-.volt-btn:hover{border-color:rgba(16,212,160,.4);color:var(--text)}
-.volt-btn.active{background:rgba(16,212,160,.1);border-color:var(--green);color:var(--green);box-shadow:0 0 0 3px rgba(16,212,160,.1)}
-.volt-btn .volt-note{display:block;font-size:9px;font-weight:400;color:var(--muted);letter-spacing:.5px;margin-top:2px;line-height:1}
-.volt-btn.active .volt-note{color:rgba(16,212,160,.7)}
 .add-wrap{position:relative;margin-bottom:16px;z-index:100}
 .add-trigger{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px dashed rgba(16,212,160,.35);border-radius:12px;padding:12px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--green);transition:background .2s,border-color .2s;width:100%}
 .add-trigger:hover{background:rgba(16,212,160,.07);border-color:var(--green)}
@@ -175,8 +167,6 @@ body{min-height:auto}
 .bk-head,.bk-row{grid-template-columns:1fr 36px 52px 60px 48px;gap:4px;font-size:10px}
 .bk-head{display:none}
 .bk-row{grid-template-columns:1fr;gap:4px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:6px}
-.voltage-row{gap:8px}
-.volt-btn{padding:8px 14px;font-size:12px}
 .assumptions{gap:8px 14px;padding:12px 14px}
 .oversize-row{padding:12px 14px}
 .calc-btn{font-size:13px;padding:14px}
@@ -196,15 +186,6 @@ footer{padding-bottom:8px}
     <div class="logo">☀️</div>
     <div><h1>Solar System Sizing Calculator</h1><p>Residential · Nigeria</p></div>
     <a class="header-wa" href="https://wa.me/2348157511971" target="_blank" rel="noopener">💬 Contact Us</a>
-  </div>
-  <div class="sec">System Voltage</div>
-  <div class="voltage-row">
-    <span class="voltage-label">Select voltage:</span>
-    <div class="volt-opts">
-      <button class="volt-btn" onclick="setVoltage(12)">12V<span class="volt-note">Small systems</span></button>
-      <button class="volt-btn" onclick="setVoltage(24)">24V<span class="volt-note">Medium systems</span></button>
-      <button class="volt-btn active" onclick="setVoltage(48)">48V<span class="volt-note">Recommended</span></button>
-    </div>
   </div>
   <div class="sec">Your Appliances</div>
   <div class="add-wrap">
@@ -235,7 +216,7 @@ footer{padding-bottom:8px}
   </div>
   <div class="assumptions">
     <div class="asmpt">Peak sun hours <span>4 hrs</span></div>
-    <div class="asmpt vd">System voltage <span id="voltage-display">48V</span></div>
+    <div class="asmpt vd">System voltage <span id="voltage-display">Auto</span></div>
     <div class="asmpt" id="oversize-display">Oversizing <span>×1.2</span></div>
   </div>
   <button class="calc-btn" onclick="calculate()">
@@ -398,7 +379,6 @@ let activeCat='All',ddOpen=false,VOLTAGE=48,OVERSIZE=true;
 
 function goToResults(){const p1=document.getElementById('page1'),p2=document.getElementById('page2');p1.classList.remove('active');p1.classList.add('hidden-left');p2.classList.remove('hidden-right');p2.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}
 function goBack(){const p1=document.getElementById('page1'),p2=document.getElementById('page2');p2.classList.remove('active');p2.classList.add('hidden-right');p1.classList.remove('hidden-left');p1.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}
-function setVoltage(v){VOLTAGE=v;document.querySelectorAll('.volt-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().startsWith(v+'V')));document.getElementById('voltage-display').textContent=v+'V';}
 function toggleDropdown(){ddOpen=!ddOpen;document.getElementById('dropdown').classList.toggle('open',ddOpen);document.getElementById('trigger').classList.toggle('open',ddOpen);if(ddOpen){setTimeout(()=>document.getElementById('dd-search').focus(),60);buildDDList('',activeCat);}}
 document.addEventListener('click',e=>{if(ddOpen&&!document.querySelector('.add-wrap').contains(e.target)){ddOpen=false;document.getElementById('dropdown').classList.remove('open');document.getElementById('trigger').classList.remove('open');}});
 function buildCats(){document.getElementById('dd-cats').innerHTML=CATS.map(c=>`<span class="cat-pill${c===activeCat?' active':''}" onclick="setCategory(event,'${c}')">${c}</span>`).join('');}
@@ -416,6 +396,10 @@ function calculate(){
   if(!ids.length){alert('Add at least one appliance first.');return;}
   let items=[],totalWhDay=0,peakW=0;
   ids.forEach(id=>{const a=DB.find(x=>x.id===id),s=selected[id];const loadW=s.qty*a.w,whDay=avgWh(a,s);totalWhDay+=whDay;peakW+=loadW;items.push({name:a.name,icon:a.icon,qty:s.qty,w:a.w,hrs:s.hrs,loadW,whDay});});
+  /* Auto-select system voltage based on total daily energy */
+  if(totalWhDay<=1500)VOLTAGE=12;
+  else if(totalWhDay<=4000)VOLTAGE=24;
+  else VOLTAGE=48;
   const PEAK_SUN=4;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
