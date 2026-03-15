@@ -152,7 +152,35 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .recalc-btn{width:100%;padding:14px;border:1px solid var(--border2);border-radius:13px;cursor:pointer;background:transparent;color:var(--text);font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.4px;transition:all .2s;margin-bottom:16px}
 .recalc-btn:hover{border-color:var(--green);color:var(--green);background:rgba(16,212,160,.05)}
 footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
-@media(max-width:620px){.list-head,.srow{grid-template-columns:1.4fr 44px 68px 68px 28px;gap:5px}.bk-head,.bk-row{grid-template-columns:1fr 36px 52px 60px 48px;gap:4px;font-size:10px}}
+@media(max-width:620px){
+.header{flex-wrap:wrap;gap:10px}
+.header-wa{margin-left:0;width:100%;justify-content:center;padding:10px}
+.logo{width:40px;height:40px;font-size:20px;border-radius:10px}
+.inner{padding:18px 12px 60px}
+.list-head,.srow{grid-template-columns:1.4fr 44px 68px 68px 28px;gap:5px}
+.list-head{display:none}
+.srow{grid-template-columns:1fr;gap:8px;padding:12px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px}
+.srow-name{font-size:13px}
+.srow .inp{text-align:left;padding:10px}
+.del{width:100%;justify-content:center;height:32px;border-radius:8px}
+.energy-strip{flex-direction:column;text-align:center;gap:6px;padding:14px}
+.es-right{justify-content:center}
+.big3{grid-template-columns:1fr}
+.bigcard{padding:18px 14px}
+.panel-grid{gap:8px}
+.ptag{min-width:70px;padding:8px 10px;font-size:11px}
+.bk-head,.bk-row{grid-template-columns:1fr 36px 52px 60px 48px;gap:4px;font-size:10px}
+.bk-head{display:none}
+.bk-row{grid-template-columns:1fr;gap:4px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:6px}
+.voltage-row{gap:8px}
+.volt-btn{padding:8px 14px;font-size:12px}
+.assumptions{gap:8px 14px;padding:12px 14px}
+.oversize-row{padding:12px 14px}
+.calc-btn{font-size:13px;padding:14px}
+.cta-board{padding:18px}
+.cta-wa-btn{padding:12px 22px;font-size:13px;width:100%;justify-content:center}
+.back-btn{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
