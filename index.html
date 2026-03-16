@@ -410,7 +410,7 @@ function calculate(){
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Inverter: peak load, then oversize */
   const invKvaRaw=(peakW*O)/1000;
-  let invKva=roundUpList(invKvaRaw,STD_INV_KVA);
+  let invKva=STD_INV_KVA.find(s=>s>invKvaRaw)||STD_INV_KVA[STD_INV_KVA.length-1];
   if(invKvaRaw>STD_INV_KVA[STD_INV_KVA.length-1])invKva=STD_INV_KVA[STD_INV_KVA.length-1];
   /* Panel: (totalEnergy*O + peakLoad*O) then oversize, then /sunHrs */
   const panelWattStep1=(totalWhDay*O)+(peakW*O);
