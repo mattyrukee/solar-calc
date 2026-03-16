@@ -98,6 +98,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .bigcard.bat{--ac:linear-gradient(90deg,var(--purple),#c4b5fd)}
 .bigcard.inv{--ac:linear-gradient(90deg,var(--green),var(--blue))}
 .bigcard.pan{--ac:linear-gradient(90deg,var(--sun),var(--sun2))}
+.bigcard.cc{--ac:linear-gradient(90deg,#f59e0b,#ef4444)}
+.bigcard.cc .bigcard-main{color:#f59e0b}
+.cc-section{margin-bottom:24px}
 .bigcard-icon{font-size:30px;margin-bottom:12px}
 .bigcard-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .bigcard-main{font-size:clamp(28px,4.5vw,38px);font-weight:800;line-height:1;margin-bottom:6px}
