@@ -136,7 +136,10 @@ function calculate(){
   document.getElementById('r-inv-kva').textContent=invKva+'kVA';
   document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*O))} W</strong> peak load${OVERSIZE?'<br>incl. 1.2× oversizing':''}`;
   document.getElementById('r-inv-volt-badge').textContent=VOLTAGE+'V system';
-  function renderPanelCard(pw){const n=Math.ceil(solarW/pw);document.getElementById('r-pan-main').textContent=`${pw}W (${n})`;document.getElementById('r-pan-sub').innerHTML=`<strong>${n} panel${n!==1?'s':''}</strong> × ${pw}W<br>Total: ${fmtN(n*pw)} W installed`;document.querySelectorAll('.ptag').forEach(t=>{const tw=parseInt(t.querySelector('.tag-w').textContent);const n2=Math.ceil(solarW/tw);t.querySelector('.tag-n').textContent=`${n2} panel${n2!==1?'s':''}`;t.classList.toggle('best',tw===pw);});}
+  const WA='https://wa.me/2348157511971?text=';
+  document.getElementById('r-bat-buy').href=WA+encodeURIComponent(`Hi, I need a quote for a ${batKwh}kWh battery bank (${fmtN(batAh)}Ah @ ${VOLTAGE}V) for my solar system.`);
+  document.getElementById('r-inv-buy').href=WA+encodeURIComponent(`Hi, I need a quote for a ${invKva}kVA inverter (${VOLTAGE}V system) for my solar system.`);
+  function renderPanelCard(pw){const n=Math.ceil(solarW/pw);document.getElementById('r-pan-main').textContent=`${pw}W (${n})`;document.getElementById('r-pan-sub').innerHTML=`<strong>${n} panel${n!==1?'s':''}</strong> × ${pw}W<br>Total: ${fmtN(n*pw)} W installed`;document.getElementById('r-pan-buy').href=WA+encodeURIComponent(`Hi, I need a quote for ${n} x ${pw}W solar panels (${fmtN(n*pw)}W total) for my solar system.`);document.querySelectorAll('.ptag').forEach(t=>{const tw=parseInt(t.querySelector('.tag-w').textContent);const n2=Math.ceil(solarW/tw);t.querySelector('.tag-n').textContent=`${n2} panel${n2!==1?'s':''}`;t.classList.toggle('best',tw===pw);});}
   window.renderPanelCard=renderPanelCard;
   document.getElementById('panel-opts').innerHTML=PANEL_SIZES.map(pw=>{const n=Math.ceil(solarW/pw);return`<div class="ptag${pw===500?' best':''}" onclick="renderPanelCard(${pw})"><span class="tag-w">${pw}W</span><span class="tag-n">${n} panel${n!==1?'s':''}</span></div>`;}).join('');
   renderPanelCard(500);
