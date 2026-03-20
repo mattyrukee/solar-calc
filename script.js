@@ -118,8 +118,8 @@ function calculate(){
   const batKwhRaw=(totalWhDay/1000)*O;
   const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
-  /* Inverter: peak load, then oversize */
-  const invKvaRaw=(peakW*O)/1000;
+  /* Inverter: peak load × 1.3 safety factor (startup surges), then oversize */
+  const invKvaRaw=(peakW*1.3*O)/1000;
   let invKva=STD_INV_KVA.find(s=>s>invKvaRaw)||STD_INV_KVA[STD_INV_KVA.length-1];
   if(invKvaRaw>STD_INV_KVA[STD_INV_KVA.length-1])invKva=STD_INV_KVA[STD_INV_KVA.length-1];
   /* Panel: (totalEnergy*O + peakLoad*O) then oversize, then /sunHrs */
