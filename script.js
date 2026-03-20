@@ -114,8 +114,9 @@ function calculate(){
   const PEAK_SUN=4;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
-  /* Lithium battery: totalWhDay / DOD (~100% usable for LiFePO4), then oversize */
-  const batKwhRaw=(totalWhDay/1000)*O;
+  /* Lithium battery: totalWhDay / 0.8 DOD, then oversize */
+  const DOD=0.8;
+  const batKwhRaw=(totalWhDay/1000/DOD)*O;
   const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Inverter: peak load × 1.3 safety factor (startup surges), then oversize */
