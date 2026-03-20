@@ -114,8 +114,9 @@ function calculate(){
   const PEAK_SUN=4;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
-  /* Battery: totalWhDay / DOD, then oversize */
-  const batKwhRaw=(totalWhDay/1000)*O;
+  /* Lithium battery: totalWhDay / 0.8 DOD, then oversize */
+  const DOD=0.8;
+  const batKwhRaw=(totalWhDay/1000/DOD)*O;
   const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
   const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Inverter: peak load × 1.3 safety factor (startup surges), then oversize */
@@ -133,7 +134,7 @@ function calculate(){
   document.getElementById('r-energy').textContent=totalKwh.toFixed(2);
   document.getElementById('r-appliance-count').textContent=`${ids.length} appliance${ids.length!==1?'s':''} · peak load ${fmtN(peakW)} W`;
   document.getElementById('r-bat-kwh').textContent=batKwh+'kWh';
-  document.getElementById('r-bat-sub').innerHTML=`<strong>${fmtN(batAh)} Ah</strong> @ ${VOLTAGE}V<br>${totalBats} × 100Ah/12V batteries`;
+  document.getElementById('r-bat-sub').innerHTML=`<strong>${fmtN(batAh)} Ah</strong> @ ${VOLTAGE}V<br>${totalBats} × 100Ah/12V lithium batteries`;
   document.getElementById('r-volt-badge').textContent=VOLTAGE+'V system';
   document.getElementById('r-inv-kva').textContent=invKva+'kVA';
   document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*O))} W</strong> peak load${OVERSIZE?'<br>incl. 1.2× oversizing':''}`;
@@ -156,7 +157,7 @@ function calculate(){
     }
   }
   function updateQuoteLink(pw,n,cc){
-    let msg=`Hi, I need a quote for this solar system:\n\n🔋 Battery: ${batKwh}kWh (${fmtN(batAh)}Ah @ ${VOLTAGE}V)\n🔌 Inverter: ${invKva}kVA (${VOLTAGE}V)\n☀️ Panels: ${n} × ${pw}W (${fmtN(n*pw)}W total)`;
+    let msg=`Hi, I need a quote for this solar system:\n\n🔋 Lithium Battery: ${batKwh}kWh (${fmtN(batAh)}Ah @ ${VOLTAGE}V)\n🔌 Inverter: ${invKva}kVA (${VOLTAGE}V)\n☀️ Panels: ${n} × ${pw}W (${fmtN(n*pw)}W total)`;
     if(cc&&cc.needed)msg+=`\n⚡ Charge Controller: ${cc.amps}A MPPT (${fmtN(cc.excessW)}W excess)`;
     msg+=`\n\nDaily consumption: ${totalKwh.toFixed(2)} kWh/day`;
     document.getElementById('cta-quote').href=WA+encodeURIComponent(msg);
