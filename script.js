@@ -84,7 +84,7 @@ const STD_INV_KVA=[1.8,3.6,4,6,10,12];
 const STD_BAT_KWH=[1.8,2.5,3.8,5,7.5,10,15,20,25,30,40,50];
 const PANEL_SIZES=[250,300,350,400,450,500,550,600,650];
 const INV_PV_MAX={1.8:2000,3.6:3600,4:4000,6:5000,10:8000,12:10000};
-const STD_CC_AMPS=[20,30,40,50,60,80,100];
+/* STD_CC_AMPS removed – inverter is now upsized to cover panel input */
 const selected={};
 let activeCat='All',ddOpen=false,VOLTAGE=48,OVERSIZE=true;
 
@@ -116,7 +116,9 @@ function calculate(){
   const totalKwh=totalWhDay/1000;
   /* Inverter: peak load × 1.3 safety factor (startup surges), then oversize */
   const invKvaRaw=(peakW*1.3*O)/1000;
-  let invKva=roundUpList(invKvaRaw,STD_INV_KVA);
+  let invKvaBase=roundUpList(invKvaRaw,STD_INV_KVA);
+  /* invKva may be bumped later in renderPanelCard to cover panel PV input */
+  let invKva=invKvaBase;
   /* Lithium battery: totalWhDay / 0.8 DOD, then oversize, min = inverter kVA */
   const DOD=0.8;
   const batKwhRaw=Math.max((totalWhDay/1000/DOD)*O,invKva);
@@ -138,30 +140,31 @@ function calculate(){
   document.getElementById('r-inv-kva').textContent=invKva+'kVA';
   document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*O))} W</strong> peak load${OVERSIZE?'<br>incl. 1.2× oversizing':''}`;
   document.getElementById('r-inv-volt-badge').textContent=VOLTAGE+'V system';
-  const maxPvInput=INV_PV_MAX[invKva]||invKva*1000;
   const WA='https://wa.me/2348157511971?text=';
-  function updateCC(totalPanelW){
-    const ccSec=document.getElementById('cc-section');
-    if(totalPanelW>maxPvInput){
-      const excessW=totalPanelW-maxPvInput;
-      const ccAmpsRaw=Math.ceil(excessW/VOLTAGE);
-      const ccAmps=STD_CC_AMPS.find(a=>a>=ccAmpsRaw)||STD_CC_AMPS[STD_CC_AMPS.length-1];
-      ccSec.style.display='';
-      document.getElementById('r-cc-main').textContent=ccAmps+'A MPPT';
-      document.getElementById('r-cc-sub').innerHTML=`Panels exceed inverter's <strong>${fmtN(maxPvInput)}W</strong> PV input by <strong>${fmtN(excessW)}W</strong><br>External controller handles the overflow`;
-      return{needed:true,amps:ccAmps,excessW};
-    }else{
-      ccSec.style.display='none';
-      return{needed:false};
-    }
-  }
-  function updateQuoteLink(pw,n,cc){
+  function updateQuoteLink(pw,n){
     let msg=`Hi, I need a quote for this solar system:\n\n🔋 Lithium Battery: ${batKwh}kWh (${fmtN(batAh)}Ah @ ${VOLTAGE}V)\n🔌 Inverter: ${invKva}kVA (${VOLTAGE}V)\n☀️ Panels: ${n} × ${pw}W (${fmtN(n*pw)}W total)`;
-    if(cc&&cc.needed)msg+=`\n⚡ Charge Controller: ${cc.amps}A MPPT (${fmtN(cc.excessW)}W excess)`;
     msg+=`\n\nDaily consumption: ${totalKwh.toFixed(2)} kWh/day`;
     document.getElementById('cta-quote').href=WA+encodeURIComponent(msg);
   }
-  function renderPanelCard(pw){const n=Math.ceil(solarW/pw);const totalPanelW=n*pw;document.getElementById('r-pan-main').textContent=`${pw}W (${n})`;document.getElementById('r-pan-sub').innerHTML=`<strong>${n} panel${n!==1?'s':''}</strong> × ${pw}W<br>Total: ${fmtN(totalPanelW)} W installed`;const cc=updateCC(totalPanelW);updateQuoteLink(pw,n,cc);document.querySelectorAll('.ptag').forEach(t=>{const tw=parseInt(t.querySelector('.tag-w').textContent);const n2=Math.ceil(solarW/tw);t.querySelector('.tag-n').textContent=`${n2} panel${n2!==1?'s':''}`;t.classList.toggle('best',tw===pw);});}
+  function renderPanelCard(pw){
+    const n=Math.ceil(solarW/pw);
+    const totalPanelW=n*pw;
+    /* Upsize inverter if panels exceed its PV input capacity */
+    invKva=invKvaBase;
+    let maxPv=INV_PV_MAX[invKva]||invKva*1000;
+    if(totalPanelW>maxPv){
+      const needed=STD_INV_KVA.find(k=>(INV_PV_MAX[k]||k*1000)>=totalPanelW);
+      invKva=needed||STD_INV_KVA[STD_INV_KVA.length-1];
+      maxPv=INV_PV_MAX[invKva]||invKva*1000;
+    }
+    document.getElementById('r-inv-kva').textContent=invKva+'kVA';
+    document.getElementById('r-inv-sub').innerHTML=`<strong>${fmtN(Math.round(peakW*O))} W</strong> peak load${totalPanelW>maxPv?'':invKva>invKvaBase?'<br>Upsized to handle '+fmtN(totalPanelW)+'W panels':''}${OVERSIZE?'<br>incl. 1.2× oversizing':''}`;
+    document.getElementById('r-pan-main').textContent=`${pw}W (${n})`;
+    document.getElementById('r-pan-sub').innerHTML=`<strong>${n} panel${n!==1?'s':''}</strong> × ${pw}W<br>Total: ${fmtN(totalPanelW)} W installed`;
+    document.getElementById('cc-section').style.display='none';
+    updateQuoteLink(pw,n);
+    document.querySelectorAll('.ptag').forEach(t=>{const tw=parseInt(t.querySelector('.tag-w').textContent);const n2=Math.ceil(solarW/tw);t.querySelector('.tag-n').textContent=`${n2} panel${n2!==1?'s':''}`;t.classList.toggle('best',tw===pw);});
+  }
   window.renderPanelCard=renderPanelCard;
   document.getElementById('panel-opts').innerHTML=PANEL_SIZES.map(pw=>{const n=Math.ceil(solarW/pw);return`<div class="ptag${pw===500?' best':''}" onclick="renderPanelCard(${pw})"><span class="tag-w">${pw}W</span><span class="tag-n">${n} panel${n!==1?'s':''}</span></div>`;}).join('');
   renderPanelCard(500);
