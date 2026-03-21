@@ -1,14 +1,23 @@
-# OS files
-.DS_Store
-Thumbs.db
-desktop.ini
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.env
+.env.local
+venv/
+.venv/
 
-# Editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Node
+node_modules/
+dist/
+build/
+.next/
 
-# Logs
-*.log
+# Data / models
+*.db
+*.sqlite
+*.pkl
+*.joblib
