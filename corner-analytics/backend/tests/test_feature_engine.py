@@ -149,10 +149,11 @@ class TestBuildFeatures:
 
         base = datetime(2024, 1, 1)
 
-        # Give each team 5+ finished matches
+        # Give home team 6 home games and away team 6 away games
         for i in range(6):
             _make_finished_match(db, league, home, opponent, base + timedelta(days=i * 7), 6, 4)
-            _make_finished_match(db, league, away, opponent, base + timedelta(days=i * 7 + 3), 5, 5)
+            # Chelsea must play as AWAY so away_avg_corners_for_a is populated
+            _make_finished_match(db, league, opponent, away, base + timedelta(days=i * 7 + 3), 3, 5)
 
         future_match = Match(
             api_id=9999,
