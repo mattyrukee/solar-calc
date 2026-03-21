@@ -48,7 +48,7 @@ A free, instant solar system sizing calculator designed specifically for Nigeria
 | Oversizing factor | 1.2x (toggleable) |
 | Auto-voltage thresholds | ≤1,500 Wh → 12V, ≤4,000 Wh → 24V, >4,000 Wh → 48V |
 | Standard battery sizes | 1.8, 2.5, 3.8, 5, 7.5, 10, 15, 20, 25, 30, 40, 50 kWh |
-| Standard inverter sizes | 1.8, 2.5, 3, 3.5, 5, 7.5, 10, 15, 20 kVA |
+| Standard inverter sizes | 1.8, 3.6, 4, 6, 10, 12 kVA |
 | Panel size options | 250, 300, 350, 400, 450, 500, 550, 600, 650 W |
 
 ## Project Structure
