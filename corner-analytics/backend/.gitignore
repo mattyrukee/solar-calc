@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+app/ml/models/*.pkl
+app/ml/models/feature_names.json
+app/ml/models/metrics.json
+data/statsbomb/
+.pytest_cache/
