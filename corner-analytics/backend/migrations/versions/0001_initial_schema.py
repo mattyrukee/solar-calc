@@ -6,6 +6,7 @@ Create Date: 2026-03-20
 """
 from typing import Sequence, Union
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 from alembic import op
 
 revision: str = "0001"
@@ -38,8 +39,12 @@ def upgrade() -> None:
     )
 
     # --- match status enum ---
-    match_status = sa.Enum("scheduled", "live", "finished", "postponed", name="matchstatus")
-    match_status.create(op.get_bind())
+    # Let postgresql.ENUM handle type creation (create_type=True, the default).
+    # It creates the type once as part of create_table and won't duplicate it.
+    match_status_col = postgresql.ENUM(
+        "scheduled", "live", "finished", "postponed",
+        name="matchstatus",
+    )
 
     # --- matches ---
     op.create_table(
@@ -51,7 +56,7 @@ def upgrade() -> None:
         sa.Column("fixture_date", sa.DateTime(), nullable=False),
         sa.Column("home_team_id", sa.Integer(), sa.ForeignKey("teams.id"), nullable=False),
         sa.Column("away_team_id", sa.Integer(), sa.ForeignKey("teams.id"), nullable=False),
-        sa.Column("status", match_status, server_default="scheduled"),
+        sa.Column("status", match_status_col, server_default="scheduled"),
         sa.Column("home_score", sa.Integer()),
         sa.Column("away_score", sa.Integer()),
         sa.Column("home_corners", sa.Integer()),
@@ -111,6 +116,6 @@ def downgrade() -> None:
     op.drop_index("ix_matches_league_status", "matches")
     op.drop_index("ix_matches_fixture_date", "matches")
     op.drop_table("matches")
-    sa.Enum(name="matchstatus").drop(op.get_bind())
+    op.execute("DROP TYPE IF EXISTS matchstatus")
     op.drop_table("teams")
     op.drop_table("leagues")
