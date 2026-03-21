@@ -7,10 +7,14 @@ from alembic import context
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from app.models.db_models import Base  # noqa: E402
+from app.config import settings  # noqa: E402
 
 config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+# Override URL with DATABASE_URL env var so Docker / CI work without editing alembic.ini
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 target_metadata = Base.metadata
 
