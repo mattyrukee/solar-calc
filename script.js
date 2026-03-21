@@ -114,15 +114,14 @@ function calculate(){
   const PEAK_SUN=4;
   const O=OVERSIZE?1.2:1;
   const totalKwh=totalWhDay/1000;
-  /* Lithium battery: totalWhDay / 0.8 DOD, then oversize */
-  const DOD=0.8;
-  const batKwhRaw=(totalWhDay/1000/DOD)*O;
-  const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
-  const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Inverter: peak load × 1.3 safety factor (startup surges), then oversize */
   const invKvaRaw=(peakW*1.3*O)/1000;
-  let invKva=STD_INV_KVA.find(s=>s>invKvaRaw)||STD_INV_KVA[STD_INV_KVA.length-1];
-  if(invKvaRaw>STD_INV_KVA[STD_INV_KVA.length-1])invKva=STD_INV_KVA[STD_INV_KVA.length-1];
+  let invKva=roundUpList(invKvaRaw,STD_INV_KVA);
+  /* Lithium battery: totalWhDay / 0.8 DOD, then oversize, min = inverter kVA */
+  const DOD=0.8;
+  const batKwhRaw=Math.max((totalWhDay/1000/DOD)*O,invKva);
+  const batKwh=roundUpList(batKwhRaw,STD_BAT_KWH);
+  const batAh=Math.ceil((batKwh*1000)/VOLTAGE);
   /* Panel: (totalEnergy*O + peakLoad*O) then oversize, then /sunHrs */
   const panelWattStep1=(totalWhDay*O)+(peakW*O);
   const panelOversize=panelWattStep1*O;
