@@ -77,8 +77,27 @@ const DB=[
   {id:'vacuum',name:'Vacuum Cleaner',icon:'🧹',w:1400,cat:'Utilities',daily:false},
   {id:'gate_motor',name:'Gate Motor',icon:'🚪',w:500,cat:'Utilities',daily:false},
   {id:'intercom',name:'Intercom / Video Door',icon:'🔔',w:10,cat:'Utilities',daily:true},
+  {id:'chiller_bottle',name:'Bottle Chiller / Cooler',icon:'🍾',w:200,cat:'Commercial',daily:true},
+  {id:'chiller_display_sm',name:'Display Chiller — Small',icon:'🧊',w:300,cat:'Commercial',daily:true},
+  {id:'chiller_display_lg',name:'Display Chiller — Large',icon:'🧊',w:500,cat:'Commercial',daily:true},
+  {id:'chiller_walkin',name:'Walk-in Chiller / Cold Room',icon:'🧊',w:1500,cat:'Commercial',daily:true},
+  {id:'ice_maker',name:'Ice Maker',icon:'🧊',w:350,cat:'Commercial',daily:true},
+  {id:'pos_terminal',name:'POS Terminal',icon:'💳',w:50,cat:'Commercial',daily:true},
+  {id:'cash_register',name:'Cash Register',icon:'💰',w:30,cat:'Commercial',daily:true},
+  {id:'barbing_clipper',name:'Barbing Clipper (Professional)',icon:'💈',w:25,cat:'Commercial',daily:false},
+  {id:'salon_dryer_hood',name:'Salon Hair Dryer (Hood)',icon:'💈',w:1000,cat:'Commercial',daily:false},
+  {id:'salon_steamer',name:'Hair Steamer',icon:'💈',w:650,cat:'Commercial',daily:false},
+  {id:'sewing_domestic',name:'Sewing Machine — Domestic',icon:'🧵',w:100,cat:'Commercial',daily:false},
+  {id:'sewing_industrial',name:'Sewing Machine — Industrial',icon:'🧵',w:550,cat:'Commercial',daily:false},
+  {id:'heat_press',name:'Heat Press Machine',icon:'👕',w:1800,cat:'Commercial',daily:false},
+  {id:'projector',name:'Projector',icon:'📽️',w:300,cat:'Commercial',daily:false},
+  {id:'photocopier',name:'Photocopier / Scanner',icon:'🖨️',w:1200,cat:'Commercial',daily:false},
+  {id:'air_compressor',name:'Air Compressor — Small',icon:'🔧',w:750,cat:'Commercial',daily:false},
+  {id:'welder_arc',name:'Welding Machine — Arc',icon:'🔧',w:3500,cat:'Commercial',daily:false},
+  {id:'grinder',name:'Angle Grinder',icon:'🔧',w:850,cat:'Commercial',daily:false},
+  {id:'electric_drill',name:'Electric Drill',icon:'🔧',w:600,cat:'Commercial',daily:false},
 ];
-const DEFHRS={led_bulb:6,cfl_bulb:6,tube_light:6,flood_45:5,flood_100:5,street_light:10,ceil_fan:8,stand_fan:8,table_fan:6,exhaust_fan:4,ac_1hp:6,ac_1_5hp:6,ac_2hp:6,ac_2_5hp:6,ac_3hp:6,fridge_sm:24,fridge_md:24,fridge_lg:24,fridge_xl:24,deep_frz_sm:24,deep_frz_md:24,deep_frz_lg:24,microwave_sm:0.5,microwave_lg:0.5,elec_kettle:0.5,blender:0.5,toaster:0.3,cooker_2plate:2,cooker_4plate:2,induction:2,rice_cooker:1,food_warmer:4,wm_hand:1,wm_semi:1.5,wm_top_load:1.5,wm_front_load:2,wm_front_load_lg:2.5,dryer_sm:1,dryer_lg:1.5,pressing_iron:1,steam_iron:1,tv_24:6,tv_32:6,tv_43:6,tv_55:6,tv_65:6,decoder:6,sound_sm:4,sound_lg:4,laptop_sm:5,laptop:5,laptop_lg:4,desktop:5,printer:0.5,phone_chgr:3,phone_chgr_fast:2,phone_chgr_super:1.5,tablet_chgr:3,laptop_chgr_usbc:5,laptop_chgr_lg:4,pump_half:2,pump_1hp:2,pump_1_5hp:2,pump_2hp:2,borehole_1hp:3,borehole_2hp:3,submersible:3,water_heater_ins:0.5,water_heater_str:1,security_cam:24,cctv_dvr:24,router:24,router_4g:24,hair_dryer:0.5,clipper:0.5,vacuum:0.5,gate_motor:0.3,intercom:24};
+const DEFHRS={led_bulb:6,cfl_bulb:6,tube_light:6,flood_45:5,flood_100:5,street_light:10,ceil_fan:8,stand_fan:8,table_fan:6,exhaust_fan:4,ac_1hp:6,ac_1_5hp:6,ac_2hp:6,ac_2_5hp:6,ac_3hp:6,fridge_sm:24,fridge_md:24,fridge_lg:24,fridge_xl:24,deep_frz_sm:24,deep_frz_md:24,deep_frz_lg:24,microwave_sm:0.5,microwave_lg:0.5,elec_kettle:0.5,blender:0.5,toaster:0.3,cooker_2plate:2,cooker_4plate:2,induction:2,rice_cooker:1,food_warmer:4,wm_hand:1,wm_semi:1.5,wm_top_load:1.5,wm_front_load:2,wm_front_load_lg:2.5,dryer_sm:1,dryer_lg:1.5,pressing_iron:1,steam_iron:1,tv_24:6,tv_32:6,tv_43:6,tv_55:6,tv_65:6,decoder:6,sound_sm:4,sound_lg:4,laptop_sm:5,laptop:5,laptop_lg:4,desktop:5,printer:0.5,phone_chgr:3,phone_chgr_fast:2,phone_chgr_super:1.5,tablet_chgr:3,laptop_chgr_usbc:5,laptop_chgr_lg:4,pump_half:2,pump_1hp:2,pump_1_5hp:2,pump_2hp:2,borehole_1hp:3,borehole_2hp:3,submersible:3,water_heater_ins:0.5,water_heater_str:1,security_cam:24,cctv_dvr:24,router:24,router_4g:24,hair_dryer:0.5,clipper:0.5,vacuum:0.5,gate_motor:0.3,intercom:24,chiller_bottle:24,chiller_display_sm:24,chiller_display_lg:24,chiller_walkin:24,ice_maker:8,pos_terminal:10,cash_register:10,barbing_clipper:4,salon_dryer_hood:3,salon_steamer:2,sewing_domestic:4,sewing_industrial:8,heat_press:3,projector:4,photocopier:2,air_compressor:3,welder_arc:4,grinder:2,electric_drill:2};
 const CATS=['All',...new Set(DB.map(a=>a.cat))];
 const STD_INV_KVA=[1.8,3.6,4,6,10,12];
 const STD_BAT_KWH=[1.8,2.5,3.8,5,7.5,10,15,20,25,30,40,50];
